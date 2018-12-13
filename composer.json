@@ -1,0 +1,25 @@
+{
+    "name": "masterix21/fattura-elettronica",
+    "description": "Libreria PHP per la creazione di fatture elettroniche compatibili con il sistema di interscambio (SDI).",
+    "keywords": ["fattura", "elettronica", "SDI", "sistema", "interscambio"],
+    "type": "library",
+    "license": "GNU General Public License v3.0",
+    "authors": [
+        {
+            "name": "Luca Longo",
+            "email": "l.longo@ambita.it"
+        }
+    ],
+    "require": {
+        "servo/fluidxml": "^1.21",
+        "nesbot/carbon": "1.*",
+        "slam/php-validatore-fattura-elettronica": "v1.2-patch20181010.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "masterix21\\FatturaElettronica\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
