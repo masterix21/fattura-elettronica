@@ -39,6 +39,11 @@ class Documento extends Model
 		}
 	}
 
+	/**
+	 * Genera il documento XML
+	 *
+	 * @return FluidXml
+	 */
 	public function xml() {
 		$fattura = new FluidXml(null);
 
