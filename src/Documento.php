@@ -15,6 +15,8 @@ use masterix21\FatturaElettronica\Models\Header;
  */
 class Documento extends Model
 {
+	private $public = false;
+
 	protected $properties = [
 		'Header',
 		'Body'
@@ -25,11 +27,19 @@ class Documento extends Model
 		'Body' => Body::class
 	];
 
-	public function __construct() {
+	public function __construct($public = false) {
 		parent::__construct();
+
+		$this->public = $public;
+
+		if ($public) {
+			$this->Header->DatiTrasmissione->FormatoTrasmissione = "FPA12";
+		} else {
+			$this->Header->DatiTrasmissione->FormatoTrasmissione = "FPR12";
+		}
 	}
 
-	public function generaXml() {
+	public function xml() {
 		$fattura = new FluidXml(null);
 
 		$dsNS = fluidns("ds", "http://www.w3.org/2000/09/xmldsig#");
@@ -43,8 +53,9 @@ class Documento extends Model
 		$rootNode->setAttributeNS('http://www.w3.org/2000/xmlns/', "xmlns:{$dsNS->id()}", $dsNS->uri());
 		$rootNode->setAttributeNS('http://www.w3.org/2000/xmlns/', "xmlns:{$pNS->id()}", $pNS->uri());
 		$rootNode->setAttributeNS('http://www.w3.org/2000/xmlns/', "xmlns:{$xsiNS->id()}", $xsiNS->uri());
-		$rootNode->setAttribute("versione", "FPR12");
+		$rootNode->setAttribute("versione", $this->Header->DatiTrasmissione->FormatoTrasmissione);
 		$rootNode->setAttribute("xsi:schemaLocation", "http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2 http://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.2/Schema_del_file_xml_FatturaPA_versione_1.2.xsd");
+
 
 		$fattura->add([
 			"FatturaElettronicaHeader" => $this->Header->toArray(),
