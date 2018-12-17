@@ -3,7 +3,7 @@
     "description": "Libreria PHP per la creazione di fatture elettroniche compatibili con il sistema di interscambio (SDI).",
     "keywords": ["fattura", "elettronica", "SDI", "sistema", "interscambio"],
     "type": "library",
-    "license": "GNU General Public License v3.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Luca Longo",
