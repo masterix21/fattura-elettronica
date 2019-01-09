@@ -39,4 +39,18 @@ class Body extends Model
 	public function __construct() {
 		parent::__construct();
 	}
+
+	/**
+	 * Aggiunge le informazioni su un pagamento
+	 *
+	 * @param DatiPagamento\DettaglioPagamento $DatiPagamento
+	 *
+	 * @return $this
+	 */
+	public function addDatiPagamento($DatiPagamento) {
+		$dati = $this->DatiPagamento ?? [];
+		array_push($dati, [ 'DatiPagamento' => $DatiPagamento ]);
+		$this->DatiPagamento = $dati;
+		return $this;
+	}
 }

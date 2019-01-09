@@ -25,4 +25,19 @@ class DatiPagamento extends Model
 	public function __construct() {
 		parent::__construct();
 	}
+
+	/**
+	 * Aggiunge un dettaglio di pagamento
+	 *
+	 * @param DatiPagamento\DettaglioPagamento $DatiPagamento
+	 *
+	 * @return $this
+	 */
+	public function addDettaglioPagamento($DettaglioPagamento)
+	{
+		$dettagli = $this->DettaglioPagamento ?? [];
+		array_push($dettagli, [ 'DettaglioPagamento' => $DettaglioPagamento ]);
+		$this->DettaglioPagamento = $dettagli;
+		return $this;
+	}
 }
